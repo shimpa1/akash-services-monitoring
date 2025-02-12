@@ -1,0 +1,5 @@
+namespace: monitoring
+
+clusterName: <cluster_name>
+
+targetIp: <IP-or-hostname>

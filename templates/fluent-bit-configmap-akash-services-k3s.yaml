@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: fluent-bit-config
-  namespace: monitoring
+  namespace: {{ .Values.namespace }}
 data:
   fluent-bit.conf: |
     [SERVICE]
@@ -33,15 +33,15 @@ data:
     [FILTER]
         Name modify
         Match kube.var.log.containers.akash-provider*
-        Add cluster_name <CLUSTER_NAME>
+        Add cluster_name {{ .Values.clusterName }}
         Add container_name akash-provider-0
 
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.akash-provider*
-        Host <host>
+        Host {{ .Values.targetIp }}
         Port 32100
-        Labels cluster_name=<CLUSTER_NAME>,container_name=akash-provider-0
+        Labels cluster_name={{ .Values.clusterName }},container_name=akash-provider-0
         Label_Keys $cluster_name,$container_name
         Line_Format json
         Auto_Kubernetes_Labels false
@@ -59,15 +59,15 @@ data:
     [FILTER]
         Name modify
         Match kube.var.log.containers.operator-hostname*
-        Add cluster_name <CLUSTER_NAME>
+        Add cluster_name {{ .Values.clusterName }}
         Add container_name operator-hostname
 
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.operator-hostname*
-        Host <host>
+        Host {{ .Values.targetIp }}
         Port 32100
-        Labels cluster_name=<CLUSTER_NAME>,container_name=operator-hostname
+        Labels cluster_name={{ .Values.clusterName }},container_name=operator-hostname
         Label_Keys $cluster_name,$container_name
         Line_Format json
         Auto_Kubernetes_Labels false
@@ -85,15 +85,15 @@ data:
     [FILTER]
         Name modify
         Match kube.var.log.containers.operator-inventory*
-        Add cluster_name <CLUSTER_NAME>
+        Add cluster_name {{ .Values.clusterName }}
         Add container_name operator-inventory
 
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.operator-inventory*
-        Host <host>
+        Host {{ .Values.targetIp }}
         Port 32100
-        Labels cluster_name=<CLUSTER_NAME>,container_name=operator-inventory
+        Labels cluster_name={{ .Values.clusterName }},container_name=operator-inventory
         Label_Keys $cluster_name,$container_name
         Line_Format json
         Auto_Kubernetes_Labels false
@@ -111,15 +111,15 @@ data:
     [FILTER]
         Name modify
         Match kube.var.log.containers.operator-inventory-hardware*
-        Add cluster_name <CLUSTER_NAME>
+        Add cluster_name {{ .Values.clusterName }}
         Add container_name operator-inventory-hardware-discovery
 
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.operator-inventory-hardware*
-        Host <host>
+        Host {{ .Values.targetIp }}
         Port 32100
-        Labels cluster_name=<CLUSTER_NAME>,container_name=operator-inventory-hardware-discovery
+        Labels cluster_name={{ .Values.clusterName }},container_name=operator-inventory-hardware-discovery
         Label_Keys $cluster_name,$container_name
         Line_Format json
         Auto_Kubernetes_Labels false
@@ -137,15 +137,15 @@ data:
     [FILTER]
         Name          modify
         Match         kube.var.log.kubernetes.events
-        Add          cluster_name <CLUSTER_NAME>
+        Add          cluster_name {{ .Values.clusterName }}
         Add          log_type kubernetes_events
 
     [OUTPUT]
         Name          loki
         Match         kube.var.log.kubernetes.events
-        Host          <host>
+        Host          {{ .Values.targetIp }}
         Port          32100
-        Labels        cluster_name=<CLUSTER_NAME>,log_type=kubernetes_events
+        Labels        cluster_name={{ .Values.clusterName }},log_type=kubernetes_events
         Label_Keys    $cluster_name,$log_type
         Line_Format   json
         Auto_Kubernetes_Labels false
