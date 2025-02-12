@@ -1,24 +1,13 @@
-A fluent-bit configmap, daemonset and all the relevant config files designed to catch, label and ship logs and events from akash-services namespace to a Loki instance.
+Helm chart for installing fluent-bit logs collector.
 
-Make sure to update the CLUSTER_NAME to match your own value in files `fluent-bit-daemonset-akash-services.yaml` and `fluent-bit-configmap-akash-services-k8s.yaml` or `fluent-bit-configmap-akash-services-k3s.yaml`
+To install:
 
-Make sure to set the target <host> in the output sections of the `fluent-bit-configmap-akash-services-k3s.yaml` file.
+```
+helm install akash-services-monitoring https://github.com/shimpa1/akash-services-monitoring --set clusterName=<your-cluster-name> --set targetIp=<your-target-ip>
+```
 
-`kubectl -n monitoring create job fluent-bit-init --image=busybox -- /bin/sh -c "mkdir -p /var/lib/fluent-bit"`
+To uninstall:
 
-`kubectl apply -f fluent-bit-service-acct.yaml`
-
-`kubectl apply -f fluent-bit-clusterrole.yaml`
-
-`kubectl apply -f fluent-bit-clusterrole-binding.yaml`
-
-Then, depending on your architecture use either the K8S or the K3S configmap:
-
-`kubectl apply -f fluent-bit-configmap-akash-services-k8s.yaml`
-
-And last, apply the daemonset:
-
-`kubectl apply -f fluent-bit-daemonset-akash-services.yaml`
-
-Watch the reload process:
-`kubectl -n monitoring rollout status ds/fluent-bit` 
+```
+helm uninstall akash-services-monitoring
+```
