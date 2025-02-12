@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluent-bit
-  namespace: monitoring
+  namespace: {{ .Values.namespace }}
   labels:
     app: fluent-bit
 spec:
@@ -21,7 +21,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: CLUSTER_NAME
-          value: ""  # MODIFY WITH YOUR CLUSTER NAME
+          value: {{ .Values.clusterName }}
         volumeMounts:
         - name: varlog
           mountPath: /var/log
