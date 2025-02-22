@@ -39,8 +39,8 @@ data:
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.akash-provider*
-        Host {{ .Values.targetIp }}
-        Port 32100
+        Host {{ .Values.lokiHost }}
+        Port {{ .Values.lokiPort }}
         Labels cluster_name={{ .Values.clusterName }},container_name=akash-provider-0
         Label_Keys $cluster_name,$container_name
         Line_Format json
@@ -65,8 +65,8 @@ data:
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.operator-hostname*
-        Host {{ .Values.targetIp }}
-        Port 32100
+        Host {{ .Values.lokiHost }}
+        Port {{ .Values.lokiPort }}
         Labels cluster_name={{ .Values.clusterName }},container_name=operator-hostname
         Label_Keys $cluster_name,$container_name
         Line_Format json
@@ -91,8 +91,8 @@ data:
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.operator-inventory*
-        Host {{ .Values.targetIp }}
-        Port 32100
+        Host {{ .Values.lokiHost }}
+        Port {{ .Values.lokiPort }}
         Labels cluster_name={{ .Values.clusterName }},container_name=operator-inventory
         Label_Keys $cluster_name,$container_name
         Line_Format json
@@ -117,8 +117,8 @@ data:
     [OUTPUT]
         Name loki
         Match kube.var.log.containers.operator-inventory-hardware*
-        Host {{ .Values.targetIp }}
-        Port 32100
+        Host {{ .Values.lokiHost }}
+        Port {{ .Values.lokiPort }}
         Labels cluster_name={{ .Values.clusterName }},container_name=operator-inventory-hardware-discovery
         Label_Keys $cluster_name,$container_name
         Line_Format json
@@ -143,8 +143,8 @@ data:
     [OUTPUT]
         Name          loki
         Match         kube.var.log.kubernetes.events
-        Host          {{ .Values.targetIp }}
-        Port          32100
+        Host          {{ .Values.lokiHost }}
+        Port          {{ .Values.lokiPort }}
         Labels        cluster_name={{ .Values.clusterName }},log_type=kubernetes_events
         Label_Keys    $cluster_name,$log_type
         Line_Format   json

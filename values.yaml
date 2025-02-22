@@ -1,5 +1,9 @@
 namespace: monitoring
 
-clusterName: <cluster_name>
+appName: fluent-bit
 
-targetIp: <IP-or-hostname>
+lokiHost: <hostname>
+
+lokiPort: 3100
+
+clusterName: console
