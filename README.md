@@ -3,11 +3,13 @@ Helm chart for installing fluent-bit logs collector.
 To install:
 
 ```
-helm install akash-services-monitoring https://github.com/shimpa1/akash-services-monitoring --set clusterName=<your-cluster-name> --set targetIp=<your-target-ip>
+git clone https://github.com/shimpa1/akash-services-monitoring
+cd akash-services-monitoring
+helm install --create-namespace akash-services-monitoring -n monitoring --set clusterName=<your-cluster-name> --set targetIp=<your-target-ip> .
 ```
 
 To uninstall:
 
 ```
-helm uninstall akash-services-monitoring
+helm uninstall -n monitoring akash-services-monitoring
 ```
