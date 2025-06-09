@@ -5,7 +5,7 @@ To install:
 ```
 git clone https://github.com/shimpa1/akash-services-monitoring
 cd akash-services-monitoring
-helm install --create-namespace akash-services-monitoring -n monitoring --set clusterName=<your-cluster-name> --set targetIp=<your-target-ip> .
+helm install --create-namespace akash-services-monitoring -n monitoring --set clusterName=<your-cluster-name> --set lokiHost=<your-target-ip> .
 ```
 
 To uninstall:
