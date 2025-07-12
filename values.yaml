@@ -1,9 +1,23 @@
-namespace: monitoring
+clusterName: ""        # 👈 REQUIRED – e.g. "prod-eu-west"
+platform: "k3s"        # 👈 REQUIRED – "k8s" or "k3s"
+loki:
+  # Primary Loki endpoint
+  host: ""             # 👈 REQUIRED – IP or DNS name, e.g. "100.70.2.34"
+  port: 32100          # change if your Loki is on another port
+  
+  # Secondary Loki endpoint
+  secondary:
+    host: ""           # 👈 OPTIONAL – IP or DNS name for second endpoint
+    port: 32100        # change if your secondary Loki is on another port
+  
+  # Tertiary Loki endpoint
+  tertiary:
+    host: ""           # 👈 OPTIONAL – IP or DNS name for third endpoint
+    port: 32100        # change if your tertiary Loki is on another port
 
-appName: fluent-bit
+image:
+  repository: fluent/fluent-bit
+  tag: 2.1.10
+  pullPolicy: IfNotPresent
+namespace: "monitoring"
 
-lokiHost: <hostname>
-
-lokiPort: 32100
-
-clusterName: <cluster_name>
